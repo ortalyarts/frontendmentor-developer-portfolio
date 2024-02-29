@@ -22,6 +22,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
       body: formDataString,
       headers: {
         "Content-Type": "text/plain;charset=utf-8",
+        "Access-Control-Allow-Origin": "*"
       },
     }
   )
