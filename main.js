@@ -20,9 +20,9 @@ document.getElementById("form").addEventListener("submit", function (e) {
       redirect: "follow",
       method: "POST",
       body: formDataString,
+      mode: "no-cors",
       headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-        "Access-Control-Allow-Origin": "*"
+        "Content-Type": "text/plain;charset=utf-8"
       },
     }
   )
