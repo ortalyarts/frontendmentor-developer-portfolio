@@ -561,7 +561,7 @@ form input:focus, .form input:active, textarea:focus, textarea:active {
     letter-spacing:-2.5px;
   }
   .laguages {
-    margin-top:13.688rem;
+    margin-top:9.313rem;
     padding-top:4.062rem;
   }
   .projects {
@@ -654,49 +654,13 @@ form input:focus, .form input:active, textarea:focus, textarea:active {
 
 
 /* Icons Animation */
-
-#pattern-top .ring-1, #pattern-top .ring-2, #pattern-top .ring-3, #pattern-top .ring-4, #pattern-top .ring-5 {
-  display: inline-block;
-  animation: goSide 1s linear infinite;
-  animation-play-state: paused;
-  animation-iteration-count: 1;
-  animation-fill-mode: both;
-}
-#pattern-top .ring-1{
-  animation-delay: calc(var(--scroll) * -2s);
-}
-#pattern-top .ring-2 {
-  animation-delay: calc(var(--scroll) * -3s);
-}
-#pattern-top .ring-3 {
-  animation-delay: calc(var(--scroll) * -4s);
-}
-#pattern-top .ring-4 {
-  animation-delay: calc(var(--scroll) * -5s);
-}
-#pattern-top .ring-5 {
-  animation-delay: calc(var(--scroll) * -6s);
-}
-@keyframes goSide {
-  to {
-    transform: translateX(-1000rem);
-    opacity:0;
-  }
-}
 @keyframes goDown {
   to {
     transform: translateY(0rem);
     opacity:1;
   }
 }
-@keyframes comeFromSide {
-  to {
-    transform: translateX(0rem);
-    opacity:1;
-  }
-}
-#pattern-middle .ring-1, #pattern-middle .ring-2, #pattern-middle .ring-3, #pattern-middle .ring-4, #pattern-middle .ring-5/*,
-#pattern-bottom .ring-1, #pattern-bottom .ring-2, #pattern-bottom .ring-3, #pattern-bottom .ring-4, #pattern-bottom .ring-5*/
+#pattern-middle .ring-1, #pattern-middle .ring-2, #pattern-middle .ring-3, #pattern-middle .ring-4, #pattern-middle .ring-5
  {
   display: inline-block;
   transform:translateY(-6rem);
@@ -722,31 +686,5 @@ form input:focus, .form input:active, textarea:focus, textarea:active {
   animation-delay: calc(var(--scroll) * -4.5s);
 }
 
-#pattern-bottom .ring-1, #pattern-bottom .ring-2, #pattern-bottom .ring-3, #pattern-bottom .ring-4, #pattern-bottom .ring-5
-{
-  display: inline-block;
-  animation: comeFromSide 1s linear infinite forwards;
-  animation-play-state: paused;
-  transform: translateX(-1000rem);
-  opacity:0;
-  animation-iteration-count: 1;
-  animation-fill-mode: both;
-}
-
-#pattern-bottom .ring-1{
-  animation-delay: calc(var(--scroll) * -1s);
-}
-#pattern-bottom .ring-2 {
-  animation-delay: calc(var(--scroll) * -1.01s);
-}
-#pattern-bottom .ring-3 {
-  animation-delay: calc(var(--scroll) * -1.02s);
-}
-#pattern-bottom .ring-4 {
-  animation-delay: calc(var(--scroll) * -1.03s);
-}
-#pattern-bottom .ring-5 {
-  animation-delay: calc(var(--scroll) * -1.04s);
-}
 
 /* Animation end */
