@@ -1,11 +1,77 @@
-document.getElementById("form").addEventListener("submit", function (e) {
-  e.preventDefault(); // Prevent the default form submission
+const inputName = document.querySelector('#name');
+const inputEmail = document.querySelector('#email');
+const inputMessage = document.querySelector('#userMessage');
+
+// Function validating the filds
+
+const showSuccessMessage = () =>{
+  console.log('Inputs are ok')
+  
+}
+
+function validate(inputId, inputType){
+  let n = inputId; // get input id
+  let nInvalidMessage = inputId.parentNode.querySelector('.invalid-message');
+
+  function addError (errorText){
+    nInvalidMessage.innerText = `${errorText}`;
+    nInvalidMessage.classList.add('activeMessage');
+    inputId.classList.add('input-invalid');
+  }
+  function removeError (){
+    nInvalidMessage.classList.remove('activeMessage');
+    inputId.classList.remove('input-invalid');
+  }
+   
+  // Name validation
+  if (inputType == "name"){
+    if (inputId.value == "") {
+      addError("Can't be blank");
+      return false;
+    } else{
+      removeError();
+      return true;
+    }
+  }
+  // Email validation
+  if (inputType == "email"){
+    var rea = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.\w+$/;
+    var Email = inputEmail.value;
+    var x = rea.test(Email);
+
+    if (inputId.value == "") {
+      addError("Can't be blank");
+      return false;
+    } else if(!x){
+      addError("Sorry, invalid format here");
+      return false;
+    }
+    else{
+      removeError();
+      return true;
+    }
+  }
+  // User Message validation
+  if (inputType == "userMessage"){
+    if (inputId.value == "") {
+      addError("Can't be blank");
+      return false;
+    } else{
+      removeError();
+      return true;
+    }
+  }
+  
+}
+
+function submitUserData(form){
   document.getElementById("message").textContent = "Submitting..";
   document.getElementById("message").style.display = "block";
   document.getElementById("submit-button").disabled = true;
 
   // Collect the form data
-  var formData = new FormData(this);
+  var formData = new FormData(form);
+  console.log(form);
   var keyValuePairs = [];
   for (var pair of formData.entries()) {
     keyValuePairs.push(pair[0] + "=" + pair[1]);
@@ -31,16 +97,14 @@ document.getElementById("form").addEventListener("submit", function (e) {
       if (response) {
         return response; // Assuming your script returns JSON response
       } else {
-        throw new Error("Failed to submit the form.");
+        throw new Error("Failed to send the message.");
       }
     })
     .then(function (data) {
       // Display a success message
       document.getElementById("message").textContent =
-        "Data submitted successfully!";
+        "Thank you for contacting me!";
       document.getElementById("message").style.display = "block";
-      document.getElementById("message").style.backgroundColor = "green";
-      document.getElementById("message").style.color = "beige";
       document.getElementById("submit-button").disabled = false;
       document.getElementById("form").reset();
 
@@ -53,7 +117,59 @@ document.getElementById("form").addEventListener("submit", function (e) {
       // Handle errors, you can display an error message here
       console.error(error);
       document.getElementById("message").textContent =
-        "An error occurred while submitting the form.";
+        "An error occurred while ssending the message.";
       document.getElementById("message").style.display = "block";
     });
+}
+document.getElementById("form").addEventListener("submit", function (e) {
+  e.preventDefault(); // Prevent the default form submission
+
+  let isValidName = validate(inputName, 'name');
+  let isValidEmail = validate(inputEmail, 'email');
+  let isValidUserMessage = validate(inputMessage, 'userMessage');
+
+  // If all the fiealds are valid - show success message
+  if(isValidName && isValidEmail && isValidUserMessage){
+    showSuccessMessage();
+    submitUserData(this);
+  }
+
 });
+
+
+// Scroll icons animation
+
+window.addEventListener('scroll', () => {
+  document.body.style.setProperty('--scroll', window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
+  //console.log(window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
+}, false);
+
+// Scroll project image animation
+
+gsap.registerPlugin(ScrollTrigger);
+
+let masks = document.querySelectorAll('.mask');
+
+masks.forEach( mask => {
+    let image = mask.querySelector('img');
+
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: mask,
+            toggleActions: "restart none none reset"
+        }
+    });
+
+    tl.set(mask, {autoAlpha: 1});
+
+    tl.from(mask, 1.5, {
+        xPercent: -100,
+        ease: Power2.out
+    });
+    tl.from(image, 1.5, {
+        xPercent: 100,
+        scale: 1.3,
+        delay: -1.5,
+        ease: Power2.out
+    });
+})
